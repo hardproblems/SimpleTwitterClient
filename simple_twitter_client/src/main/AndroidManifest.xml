@@ -25,7 +25,7 @@
             android:value="1" />
 
         <activity
-            android:name="com.codepath.simpletwitterclient.app.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.codepath.simpletwitterclient.app.TimelineActivity"
+            android:name=".activities.TimelineActivity"
             android:label="@string/title_activity_timeline" >
         </activity>
     </application>

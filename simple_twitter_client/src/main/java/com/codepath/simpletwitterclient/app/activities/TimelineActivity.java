@@ -1,6 +1,6 @@
-package com.codepath.simpletwitterclient.app;
+package com.codepath.simpletwitterclient.app.activities;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,26 +10,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import com.codepath.simpletwitterclient.app.MyTwitterApp;
+import com.codepath.simpletwitterclient.app.R;
+import com.codepath.simpletwitterclient.app.adapters.TweetsAdapter;
 import com.codepath.simpletwitterclient.app.models.Tweet;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class TimelineActivity extends Activity {
+	private TweetsAdapter tweetsAdapter;
+	private ListView lvTweets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+	    lvTweets = (ListView) findViewById(R.id.lvTweets);
+	    tweetsAdapter = new TweetsAdapter(this, new ArrayList<Tweet>());
+	    lvTweets.setAdapter(tweetsAdapter);
 	    MyTwitterApp.getRestClient().getHomeTimeline(new JsonHttpResponseHandler() {
 		    @Override
 		    public void onSuccess(JSONArray jsonTweets) {
 			    Log.d("DEBUG", jsonTweets.toString());
-			    try {
-				    List<Tweet> tweets = MyTwitterApp.OBJECT_MAPPER.readValue(jsonTweets.toString(), new TypeReference<List<Tweet>>(){});
-				    Log.d("DEBUG", "Read tweets successfully!");
-			    } catch (IOException e) {
-				    Log.e("ERROR", "Read tweets fail!");
-			    }
+			    List<Tweet> tweets = Tweet.fromJson(jsonTweets);
+			    tweetsAdapter.addAll(tweets);
 		    }
 	    });
     }
