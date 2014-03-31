@@ -1,5 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
-
+package com.codepath.simpletwitterclient.app.models;
 import java.util.List;
 
 import org.json.JSONException;

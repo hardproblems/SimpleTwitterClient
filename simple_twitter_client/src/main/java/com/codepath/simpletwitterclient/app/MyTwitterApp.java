@@ -1,6 +1,7 @@
 package com.codepath.simpletwitterclient.app;
 
 import android.content.Context;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -15,6 +16,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  *     
  */
 public class MyTwitterApp extends com.activeandroid.app.Application {
+	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	private static Context context;
 	
     @Override

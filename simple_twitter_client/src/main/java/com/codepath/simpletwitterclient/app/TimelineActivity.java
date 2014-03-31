@@ -1,5 +1,8 @@
 package com.codepath.simpletwitterclient.app;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.json.JSONArray;
 
 import android.app.Activity;
@@ -7,8 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.codepath.simpletwitterclient.app.models.Tweet;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.loopj.android.http.JsonHttpResponseHandler;
-
 
 public class TimelineActivity extends Activity {
 
@@ -20,6 +24,12 @@ public class TimelineActivity extends Activity {
 		    @Override
 		    public void onSuccess(JSONArray jsonTweets) {
 			    Log.d("DEBUG", jsonTweets.toString());
+			    try {
+				    List<Tweet> tweets = MyTwitterApp.OBJECT_MAPPER.readValue(jsonTweets.toString(), new TypeReference<List<Tweet>>(){});
+				    Log.d("DEBUG", "Read tweets successfully!");
+			    } catch (IOException e) {
+				    Log.e("ERROR", "Read tweets fail!");
+			    }
 		    }
 	    });
     }

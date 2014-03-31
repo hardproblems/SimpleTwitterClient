@@ -6,12 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class User {
+public class Tweet {
 	@JsonProperty("id_str")
 	public String idStr;
-	public String name;
-	@JsonProperty("screen_name")
-	public String screenName;
-	@JsonProperty("profile_image_url")
-	public String profileImageUrl;
+	public User user;
+	public String text;
+	@JsonProperty("created_at")
+	public String createdAt;
 }
