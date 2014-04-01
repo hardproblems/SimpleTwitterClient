@@ -1,39 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:paddingLeft="8dp"
+			  android:paddingTop="4dp"
+			  android:paddingRight="8dp"
+			  android:paddingBottom="4dp">
 
 	<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/ivProfile"
-			android:layout_marginLeft="10dp"
-			android:layout_marginTop="10dp"
+			android:layout_marginTop="4dp"
+			android:layout_marginRight="8dp"
 			android:background="@drawable/ic_launcher"/>
 
 
-	<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="match_parent"
+	<RelativeLayout
+			android:id="@+id/loFirstLine"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="10dp"
-			android:layout_marginTop="5dp"
-			android:layout_marginRight="10dp"
-			android:layout_marginBottom="15dp">
+			android:layout_marginBottom="8dp"
+			android:layout_toRightOf="@+id/ivProfile"
+			android:layout_alignTop="@+id/ivProfile"
+			android:layout_alignParentRight="true">
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/hello_world"
+			android:layout_marginRight="8dp"
+			android:text="@string/user_name"
+			android:textColor="#000"
+			android:textStyle="bold"
+			android:textSize="14sp"
 			android:id="@+id/tvName"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/hello_world"
-			android:id="@+id/tvBody"/>
-	</LinearLayout>
+			android:layout_toRightOf="@+id/tvName"
+			android:layout_alignBaseline="@+id/tvName"
+			android:text="@string/user_handle"
+			android:textSize="12sp"
+			android:id="@+id/tvHandle"/>
 
-</LinearLayout>
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignBaseline="@+id/tvName"
+			android:layout_alignParentRight="true"
+			android:text="@string/time"
+			android:textSize="10sp"
+			android:id="@+id/tvTime"/>
+
+	</RelativeLayout>
+
+	<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp"
+			android:layout_below="@+id/loFirstLine"
+			android:layout_toRightOf="@+id/ivProfile"
+			android:layout_alignParentRight="true">
+
+		<TextView
+			android:id="@+id/tvBody"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/hello_world"
+			android:textColor="#333"
+			android:linksClickable="true"
+			android:autoLink="web"
+			/>
+	</LinearLayout>
+</RelativeLayout>

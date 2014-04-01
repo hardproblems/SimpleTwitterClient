@@ -1,7 +1,7 @@
 package com.codepath.simpletwitterclient.app;
 
 import android.content.Context;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.codepath.simpletwitterclient.app.models.User;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -16,8 +16,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  *     
  */
 public class MyTwitterApp extends com.activeandroid.app.Application {
-	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	private static Context context;
+	private static User currentUser;
 	
     @Override
     public void onCreate() {
@@ -36,4 +36,12 @@ public class MyTwitterApp extends com.activeandroid.app.Application {
     public static TwitterClient getRestClient() {
     	return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, MyTwitterApp.context);
     }
+
+	public static User getCurrentUser() {
+		return currentUser;
+	}
+
+	public static void setCurrentUser(User currentUser) {
+		MyTwitterApp.currentUser = currentUser;
+	}
 }

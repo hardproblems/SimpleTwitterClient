@@ -17,4 +17,6 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+	<color name="gray">#EEEEEE</color>
+	<color name="blue">#00ACEE</color>
 </resources>

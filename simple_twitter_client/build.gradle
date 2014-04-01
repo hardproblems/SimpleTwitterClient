@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.0"
+    buildToolsVersion '19.0.0'
 
     defaultConfig {
         minSdkVersion 14
@@ -42,4 +42,5 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.3.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
 }

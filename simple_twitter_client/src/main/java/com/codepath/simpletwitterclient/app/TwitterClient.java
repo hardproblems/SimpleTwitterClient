@@ -6,6 +6,7 @@ import org.scribe.builder.api.TwitterApi;
 import android.content.Context;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /*
  * 
@@ -27,20 +28,14 @@ public class TwitterClient extends OAuthBaseClient {
     public static final String REST_CALLBACK_URL = "oauth://mytwitterapp"; // Change this (here and in manifest)
 
 	public static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
+	public static final String VERIFY_CREDENTIALS_PATH = "account/verify_credentials.json";
+	public static final String POST_UPDATE_PATH = "statuses/update.json";
 
     public TwitterClient(Context context) {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
-    
-    // CHANGE THIS
-    // DEFINE METHODS for different API endpoints here
-	public void getHomeTimeline(AsyncHttpResponseHandler handler) {
-		String url = getApiUrl(HOME_TIMELINE_PATH);
-		client.get(url, null, handler);
-	}
 
-    
-    /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
+	 /* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
      * 	  i.e getApiUrl("statuses/home_timeline.json");
      * 2. Define the parameters to pass to the request (query or body)
      *    i.e RequestParams params = new RequestParams("foo", "bar");
@@ -48,4 +43,29 @@ public class TwitterClient extends OAuthBaseClient {
      *    i.e client.get(apiUrl, params, handler);
      *    i.e client.post(apiUrl, params, handler);
      */
+
+	public void getHomeTimeline(int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
+		String url = getApiUrl(HOME_TIMELINE_PATH);
+		RequestParams params = new RequestParams();
+		params.put("count", String.valueOf(count));
+		if (sinceId > 0) {
+			params.put("since_id", String.valueOf(sinceId));
+		}
+		if (maxId > 0) {
+			params.put("max_id", String.valueOf(maxId));
+		}
+		client.get(url, params, handler);
+	}
+
+	public void verifyCredentials(AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl(VERIFY_CREDENTIALS_PATH);
+		client.get(apiUrl, handler);
+	}
+
+	public void postStatusUpdate(String status, AsyncHttpResponseHandler handler) {
+		String apiUrl = getApiUrl(POST_UPDATE_PATH);
+		RequestParams params = new RequestParams();
+		params.put("status", status);
+		client.post(apiUrl, params, handler);
+	}
 }
