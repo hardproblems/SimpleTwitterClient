@@ -28,6 +28,7 @@ public class TwitterClient extends OAuthBaseClient {
     public static final String REST_CALLBACK_URL = "oauth://mytwitterapp"; // Change this (here and in manifest)
 
 	public static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
+	public static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
 	public static final String VERIFY_CREDENTIALS_PATH = "account/verify_credentials.json";
 	public static final String POST_UPDATE_PATH = "statuses/update.json";
 
@@ -45,7 +46,15 @@ public class TwitterClient extends OAuthBaseClient {
      */
 
 	public void getHomeTimeline(int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
-		String url = getApiUrl(HOME_TIMELINE_PATH);
+		getTimeline(HOME_TIMELINE_PATH, count, sinceId, maxId, handler);
+	}
+
+	public void getMentionsTimeline(int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
+		getTimeline(MENTIONS_TIMELINE_PATH, count, sinceId, maxId, handler);
+	}
+
+	private void getTimeline(String apiPath, int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
+		String url = getApiUrl(apiPath);
 		RequestParams params = new RequestParams();
 		params.put("count", String.valueOf(count));
 		if (sinceId > 0) {

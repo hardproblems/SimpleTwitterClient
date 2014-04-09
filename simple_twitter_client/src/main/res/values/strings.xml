@@ -14,5 +14,7 @@
     <string name="compose_hint"> &lt;140 characters</string>
 	<string name="tweet_btn_label">Tweet </string>
 	<string name="cancel_btn_label">Cancel</string>
+	<string name="home_tab_title">Home</string>
+	<string name="mentions_tab_title">Mentions</string>
 
 </resources>
