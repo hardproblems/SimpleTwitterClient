@@ -6,6 +6,6 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
 	@Override
 	protected void fetchTweets(int count, final long sinceId, long maxId) {
-		MyTwitterApp.getRestClient().getHomeTimeline(count, sinceId, maxId, getHandler(count, sinceId, maxId));
+		MyTwitterApp.getRestClient().getHomeTimeline(count, sinceId, maxId, getHandler(sinceId));
 	}
 }

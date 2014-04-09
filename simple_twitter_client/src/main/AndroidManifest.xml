@@ -51,6 +51,14 @@
         <activity
             android:name="com.codepath.simpletwitterclient.app.activities.ComposeActivity"
             android:label="@string/title_activity_compose"
+            android:parentActivityName="com.codepath.simpletwitterclient.app.activities.TimelineActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="simpletwitterclient.app.activities.TimelineActivity" />
+        </activity>
+        <activity
+            android:name="com.codepath.simpletwitterclient.app.activities.ViewProfileActivity"
+            android:label="@string/title_activity_view_profile"
 			android:parentActivityName="com.codepath.simpletwitterclient.app.activities.TimelineActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

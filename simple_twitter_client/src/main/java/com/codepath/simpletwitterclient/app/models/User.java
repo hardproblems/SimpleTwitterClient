@@ -9,9 +9,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
 	@JsonProperty("id_str")
 	public String idStr;
+
 	public String name;
+	public String description;
+
 	@JsonProperty("screen_name")
 	public String screenName;
 	@JsonProperty("profile_image_url")
 	public String profileImageUrl;
+	@JsonProperty("followers_count")
+	public int numFollowers;
+	@JsonProperty("friends_count")
+	public int numFollowing;
+	@JsonProperty("statuses_count")
+	public int numTweets;
 }

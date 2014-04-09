@@ -6,4 +6,9 @@
         android:title="@string/action_compose"
 		android:icon="@drawable/ic_compose"
         android:showAsAction="always" />
+
+	<item android:id="@+id/action_view_profile"
+        android:title="@string/action_view_profile"
+		android:icon="@drawable/ic_profile"
+        android:showAsAction="ifRoom|collapseActionView" />
 </menu>

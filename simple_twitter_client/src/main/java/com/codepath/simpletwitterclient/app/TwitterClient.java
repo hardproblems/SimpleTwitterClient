@@ -29,6 +29,8 @@ public class TwitterClient extends OAuthBaseClient {
 
 	public static final String HOME_TIMELINE_PATH = "statuses/home_timeline.json";
 	public static final String MENTIONS_TIMELINE_PATH = "statuses/mentions_timeline.json";
+	public static final String USER_TIMELINE_PATH = "statuses/user_timeline.json";
+	public static final String SHOW_USER_PATH = "users/show.json";
 	public static final String VERIFY_CREDENTIALS_PATH = "account/verify_credentials.json";
 	public static final String POST_UPDATE_PATH = "statuses/update.json";
 
@@ -46,15 +48,22 @@ public class TwitterClient extends OAuthBaseClient {
      */
 
 	public void getHomeTimeline(int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
-		getTimeline(HOME_TIMELINE_PATH, count, sinceId, maxId, handler);
+		getTimeline(HOME_TIMELINE_PATH, getTimelineParams(count, sinceId, maxId), handler);
 	}
 
 	public void getMentionsTimeline(int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
-		getTimeline(MENTIONS_TIMELINE_PATH, count, sinceId, maxId, handler);
+		getTimeline(MENTIONS_TIMELINE_PATH, getTimelineParams(count, sinceId, maxId), handler);
 	}
 
-	private void getTimeline(String apiPath, int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
-		String url = getApiUrl(apiPath);
+	public void getUserTimeline(String screenName, int count, long sinceId, long maxId, AsyncHttpResponseHandler handler) {
+		RequestParams params = getTimelineParams(count, sinceId, maxId);
+		if (screenName != null) {
+			params.put("screen_name", screenName);
+		}
+		getTimeline(USER_TIMELINE_PATH, params, handler);
+	}
+
+	private RequestParams getTimelineParams(int count, long sinceId, long maxId) {
 		RequestParams params = new RequestParams();
 		params.put("count", String.valueOf(count));
 		if (sinceId > 0) {
@@ -63,6 +72,19 @@ public class TwitterClient extends OAuthBaseClient {
 		if (maxId > 0) {
 			params.put("max_id", String.valueOf(maxId));
 		}
+		return params;
+	}
+
+	private void getTimeline(String apiPath, RequestParams params, AsyncHttpResponseHandler handler) {
+		String url = getApiUrl(apiPath);
+		client.get(url, params, handler);
+	}
+
+	public void getUser(String userId, String screenName, AsyncHttpResponseHandler handler) {
+		String url = getApiUrl(SHOW_USER_PATH);
+		RequestParams params = new RequestParams();
+		params.put("user_id", userId);
+		params.put("screen_name", screenName);
 		client.get(url, params, handler);
 	}
 

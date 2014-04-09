@@ -100,7 +100,7 @@ public abstract class TweetsListFragment extends Fragment {
 
 	protected abstract void fetchTweets(int count, long sinceId, long maxId);
 
-	protected AsyncHttpResponseHandler getHandler(int count, final long sinceId, long maxId) {
+	protected AsyncHttpResponseHandler getHandler(final long sinceId) {
 		return new JsonHttpResponseHandler() {
 			@Override
 			public void onSuccess(JSONArray jsonTweets) {

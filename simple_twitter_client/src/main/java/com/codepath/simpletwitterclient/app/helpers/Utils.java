@@ -77,10 +77,8 @@ public class Utils {
 		if (tweetDate == null) {
 			return "";
 		}
-		String[] timePieces = DateUtils.getRelativeTimeSpanString(tweetDate.getTime(), System.currentTimeMillis(),
-				DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString().split(" ");
-		String shortTime = timePieces[0] + timePieces[1].substring(0, 1);
-		return shortTime;
+		return DateUtils.getRelativeTimeSpanString(tweetDate.getTime(), System.currentTimeMillis(),
+				DateUtils.SECOND_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE).toString();
 	}
 
 	public static boolean isNetworkAvailable(Context context) {

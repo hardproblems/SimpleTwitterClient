@@ -66,6 +66,10 @@ public class TimelineActivity extends FragmentActivity {
         if (id == R.id.action_compose) {
 	        startActivityForResult(new Intent(getBaseContext(), ComposeActivity.class), COMPOSE_REQUEST);
             return true;
+        } else if (id == R.id.action_view_profile) {
+	        // Start profile activity
+	        startActivity(new Intent(getBaseContext(), ViewProfileActivity.class));
+	        return true;
         }
         return super.onOptionsItemSelected(item);
     }
