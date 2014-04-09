@@ -4,49 +4,55 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.simpletwitterclient.app.activities.ViewProfileActivity">
 
-	<RelativeLayout android:id="@+id/rlHeader"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_centerHorizontal="true"
-			android:layout_alignParentTop="true"
-			android:padding="8dp">
+	<FrameLayout android:id="@+id/flHeaderContainer"
+			android:layout_width="match_parent"
+			android:layout_height="160dp">
 
-		<ImageView android:id="@+id/ivProfileImage"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+		<RelativeLayout android:id="@+id/rlHeader"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:layout_centerHorizontal="true"
 				android:layout_alignParentTop="true"
-				android:layout_centerHorizontal="true"
-				android:background="@drawable/ic_launcher"/>
+				android:padding="8dp"
+				android:background="#75000000">
 
-		<TextView android:id="@+id/tvProfileName"
-				android:gravity="center"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_centerHorizontal="true"
-				android:layout_below="@+id/ivProfileImage"
-				android:textAppearance="?android:attr/textAppearanceMedium"
-				android:text="@string/user_name" />
+			<ImageView android:id="@+id/ivProfileImage"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_alignParentTop="true"
+					android:layout_centerHorizontal="true"
+					android:background="@drawable/ic_home"/>
 
-		<TextView android:id="@+id/tvDescription"
-				android:gravity="center"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@+id/tvProfileName"
-				android:layout_centerHorizontal="true"
-				android:layout_marginTop="8dp"
-				android:textAppearance="?android:attr/textAppearanceSmall"
-				android:text="@string/user_description"
-				android:autoLink="all"
-				android:linksClickable="true"/>
-	</RelativeLayout>
+			<TextView android:id="@+id/tvProfileName"
+					android:gravity="center"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_below="@+id/ivProfileImage"
+					android:textAppearance="?android:attr/textAppearanceMediumInverse"
+					android:text="@string/user_name" />
+
+			<TextView android:id="@+id/tvDescription"
+					android:gravity="center"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@+id/tvProfileName"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="8dp"
+					android:textAppearance="?android:attr/textAppearanceSmallInverse"
+					android:text="@string/user_description"
+					android:autoLink="all"
+					android:linksClickable="true"/>
+		</RelativeLayout>
+	</FrameLayout>
 
 	<LinearLayout android:id="@+id/llCounts"
 			android:orientation="horizontal"
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
-			android:layout_below="@+id/rlHeader"
-			android:layout_alignRight="@+id/rlHeader"
+			android:layout_below="@+id/flHeaderContainer"
+			android:layout_alignRight="@+id/flHeaderContainer"
 			android:layout_marginLeft="16dp"
 			android:layout_marginTop="8dp">
 
@@ -83,7 +89,7 @@
 			android:layout_height="wrap_content"
 			android:layout_centerHorizontal="true"
 			android:layout_below="@+id/llCounts"
-			android:layout_alignRight="@+id/rlHeader"
+			android:layout_alignRight="@+id/flHeaderContainer"
 			android:layout_marginLeft="16dp"
 			android:layout_marginRight="16dp"
 			android:layout_marginBottom="16dp">
@@ -118,7 +124,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@+id/llCounts"
-			android:layout_alignRight="@+id/rlHeader"
+			android:layout_alignRight="@+id/flHeaderContainer"
 			android:layout_marginTop="32dp">
     </FrameLayout>
 

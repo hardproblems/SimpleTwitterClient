@@ -21,13 +21,15 @@ public class TimelineActivity extends FragmentActivity {
 
 	public static final int COMPOSE_REQUEST = 1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
-	    setTitle(String.format("@%s", MyTwitterApp.getCurrentUser().screenName));
-	    setupNavigationTabs();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_timeline);
+		if (MyTwitterApp.getCurrentUser() != null) {
+			setTitle(String.format("@%s", MyTwitterApp.getCurrentUser().screenName));
+		}
+		setupNavigationTabs();
+	}
 
 	private void setupNavigationTabs() {
 		ActionBar actionBar = getActionBar();
@@ -38,7 +40,7 @@ public class TimelineActivity extends FragmentActivity {
 				.setText(getText(R.string.home_tab_title)).setIcon(R.drawable.ic_home)
 				.setTag(HOME_TAB)
 				.setTabListener(new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this,
-                        HOME_TAB, HomeTimelineFragment.class));
+						HOME_TAB, HomeTimelineFragment.class));
 
 		actionBar.addTab(homeTimelineTab);
 		actionBar.selectTab(homeTimelineTab);
@@ -50,29 +52,29 @@ public class TimelineActivity extends FragmentActivity {
 		actionBar.addTab(mentionsTab);
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.timeline, menu);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.timeline, menu);
+		return true;
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_compose) {
-	        startActivityForResult(new Intent(getBaseContext(), ComposeActivity.class), COMPOSE_REQUEST);
-            return true;
-        } else if (id == R.id.action_view_profile) {
-	        // Start profile activity
-	        startActivity(new Intent(getBaseContext(), ViewProfileActivity.class));
-	        return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.action_compose) {
+			startActivityForResult(new Intent(getBaseContext(), ComposeActivity.class), COMPOSE_REQUEST);
+			return true;
+		} else if (id == R.id.action_view_profile) {
+			// Start profile activity
+			startActivity(new Intent(getBaseContext(), ViewProfileActivity.class));
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

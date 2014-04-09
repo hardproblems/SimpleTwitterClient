@@ -29,42 +29,42 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-	
+
 	// OAuth authenticated successfully, launch primary authenticated activity
 	// i.e Display application "homepage"
-    @Override
-    public void onLoginSuccess() {
-	    MyTwitterApp.getRestClient().verifyCredentials(new JsonHttpResponseHandler() {
-		    @Override
-		    public void onSuccess(int arg0, JSONObject jsonObject) {
-			    MyTwitterApp.setCurrentUser(Utils.fromJson(User.class, jsonObject));
-			    Intent i = new Intent(getBaseContext(), TimelineActivity.class);
-			    startActivity(i);
-		    }
+	@Override
+	public void onLoginSuccess() {
+		MyTwitterApp.getRestClient().verifyCredentials(new JsonHttpResponseHandler() {
+			@Override
+			public void onSuccess(int arg0, JSONObject jsonObject) {
+				MyTwitterApp.setCurrentUser(Utils.fromJson(User.class, jsonObject));
+				Intent i = new Intent(getBaseContext(), TimelineActivity.class);
+				startActivity(i);
+			}
 
-		    @Override
-		    public void onFailure(Throwable e, JSONObject errorResponse) {
-			    Toast.makeText(getBaseContext(), "Could not verify the current user!", Toast.LENGTH_SHORT).show();
-			    Log.d("DEBUG", "Failed to get current user");
-		    }
-	    });
-    }
-    
-    // OAuth authentication flow failed, handle the error
-    // i.e Display an error dialog or toast
-    @Override
-    public void onLoginFailure(Exception e) {
-	    e.printStackTrace();
-    }
-    
-    // Click handler method for the button used to start OAuth flow
-    // Uses the client to initiate OAuth authorization
-    // This should be tied to a button used to login
-    public void loginToRest(View view) {
-        if (!Utils.isNetworkAvailable(this)) {
-		    Toast.makeText(getBaseContext(), "Could not connect to network!", Toast.LENGTH_SHORT).show();
-	    }
-	    getClient().connect();
-    }
+			@Override
+			public void onFailure(Throwable e, JSONObject errorResponse) {
+				Toast.makeText(getBaseContext(), "Could not verify the current user!", Toast.LENGTH_SHORT).show();
+				Log.d("DEBUG", "Failed to get current user");
+			}
+		});
+	}
+
+	// OAuth authentication flow failed, handle the error
+	// i.e Display an error dialog or toast
+	@Override
+	public void onLoginFailure(Exception e) {
+		e.printStackTrace();
+	}
+
+	// Click handler method for the button used to start OAuth flow
+	// Uses the client to initiate OAuth authorization
+	// This should be tied to a button used to login
+	public void loginToRest(View view) {
+		if (!Utils.isNetworkAvailable(this)) {
+			Toast.makeText(getBaseContext(), "Could not connect to network!", Toast.LENGTH_SHORT).show();
+		}
+		getClient().connect();
+	}
 
 }

@@ -17,6 +17,8 @@ public class User {
 	public String screenName;
 	@JsonProperty("profile_image_url")
 	public String profileImageUrl;
+	@JsonProperty("profile_banner_url")
+	public String profileBannerUrl;
 	@JsonProperty("followers_count")
 	public int numFollowers;
 	@JsonProperty("friends_count")

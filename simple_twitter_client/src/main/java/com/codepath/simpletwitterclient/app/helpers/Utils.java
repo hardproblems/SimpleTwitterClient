@@ -23,6 +23,7 @@ public class Utils {
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 	private static final String TWEET_TIME_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
 	private static final SimpleDateFormat sf = new SimpleDateFormat(TWEET_TIME_FORMAT, Locale.ENGLISH);
+
 	static {
 		sf.setLenient(true);
 	}
@@ -32,7 +33,7 @@ public class Utils {
 	}
 
 	public static <T> T fromJson(Class<T> type, String jsonObjString) {
-		assert(type != null);
+		assert (type != null);
 		T result = null;
 		try {
 			result = OBJECT_MAPPER.readValue(jsonObjString, type);

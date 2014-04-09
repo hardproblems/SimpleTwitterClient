@@ -37,15 +37,15 @@ public abstract class TweetsListFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_tweets_list, container, false);
 		tweetsList = new ArrayList<Tweet>();
 		tweetsAdapter = new TweetsAdapter(getActivity(), tweetsList);
-	    lvTweets = (ListView) view.findViewById(R.id.lvTweets);
-	    lvTweets.setAdapter(tweetsAdapter);
-	    lvTweets.setOnScrollListener(new EndlessScrollListener(3) {
-		    @Override
-		    public void onLoadMore(int page, int totalItemsCount) {
-			    long maxId = tweetsAdapter.getItem(totalItemsCount-1).tweetId - 1;
+		lvTweets = (ListView) view.findViewById(R.id.lvTweets);
+		lvTweets.setAdapter(tweetsAdapter);
+		lvTweets.setOnScrollListener(new EndlessScrollListener(3) {
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				long maxId = tweetsAdapter.getItem(totalItemsCount - 1).tweetId - 1;
 				refreshTimeline(25, -1, maxId);
-		    }
-	    });
+			}
+		});
 		return view;
 	}
 
@@ -53,30 +53,30 @@ public abstract class TweetsListFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		// This is the View which is created by ListFragment
-        ViewGroup viewGroup = (ViewGroup) view;
+		ViewGroup viewGroup = (ViewGroup) view;
 
-        // We need to create a PullToRefreshLayout manually
-        mPullToRefreshLayout = new PullToRefreshLayout(viewGroup.getContext());
+		// We need to create a PullToRefreshLayout manually
+		mPullToRefreshLayout = new PullToRefreshLayout(viewGroup.getContext());
 
-        // We can now setup the PullToRefreshLayout
-        ActionBarPullToRefresh.from(getActivity())
-                // We need to insert the PullToRefreshLayout into the Fragment's ViewGroup
-                .insertLayoutInto(viewGroup)
-                // We need to mark the ListView and it's Empty View as pullable
-                // This is because they are not dirent children of the ViewGroup
-                .theseChildrenArePullable(lvTweets, lvTweets.getEmptyView())
-                // We can now complete the setup as desired
-                .listener(new OnRefreshListener() {
-	                @Override
-	                public void onRefreshStarted(View view) {
-		                long sinceId = -1;
-		                if (!tweetsList.isEmpty()) {
-			                sinceId = tweetsList.get(0).tweetId - 1; // -1 so we can reuse refreshTimeline with post new tweet
-		                }
-		                refreshTimeline(25, sinceId, -1);
-	                }
-                })
-                .setup(mPullToRefreshLayout);
+		// We can now setup the PullToRefreshLayout
+		ActionBarPullToRefresh.from(getActivity())
+				// We need to insert the PullToRefreshLayout into the Fragment's ViewGroup
+				.insertLayoutInto(viewGroup)
+						// We need to mark the ListView and it's Empty View as pullable
+						// This is because they are not dirent children of the ViewGroup
+				.theseChildrenArePullable(lvTweets, lvTweets.getEmptyView())
+						// We can now complete the setup as desired
+				.listener(new OnRefreshListener() {
+					@Override
+					public void onRefreshStarted(View view) {
+						long sinceId = -1;
+						if (!tweetsList.isEmpty()) {
+							sinceId = tweetsList.get(0).tweetId - 1; // -1 so we can reuse refreshTimeline with post new tweet
+						}
+						refreshTimeline(25, sinceId, -1);
+					}
+				})
+				.setup(mPullToRefreshLayout);
 	}
 
 	@Override
@@ -118,11 +118,11 @@ public abstract class TweetsListFragment extends Fragment {
 				mPullToRefreshLayout.setRefreshComplete();
 			}
 
-		    @Override
-		    public void onFailure(Throwable e, JSONObject errorResponse) {
-			    Toast.makeText(getActivity(), "Oops...failed to load tweets!", Toast.LENGTH_SHORT).show();
-		    }
-	    };
+			@Override
+			public void onFailure(Throwable e, JSONObject errorResponse) {
+				Toast.makeText(getActivity(), "Oops...failed to load tweets!", Toast.LENGTH_SHORT).show();
+			}
+		};
 	}
 
 	public void postToTop(Tweet topmostTweet) {

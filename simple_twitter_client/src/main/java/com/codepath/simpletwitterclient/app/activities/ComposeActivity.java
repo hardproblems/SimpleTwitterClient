@@ -25,12 +25,12 @@ public class ComposeActivity extends Activity {
 	TextView tvCharsLeft;
 	Button btnTweet;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compose);
-	    setupViews();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_compose);
+		setupViews();
+	}
 
 	public void setupViews() {
 		etTweet = (EditText) findViewById(R.id.etTweet);
@@ -72,7 +72,7 @@ public class ComposeActivity extends Activity {
 			@Override
 			public void onSuccess(int statusCode, String content) {
 				Toast.makeText(getBaseContext(), "Your tweet was posted successfully!", Toast.LENGTH_SHORT).show();
-				Log.d("DEBUG", "Post response content: "+content);
+				Log.d("DEBUG", "Post response content: " + content);
 				Intent data = new Intent();
 				data.putExtra("tweet", content);
 				setResult(RESULT_OK, data);
@@ -91,27 +91,27 @@ public class ComposeActivity extends Activity {
 		});
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.compose, menu);
-	    getActionBar().setDisplayHomeAsUpEnabled(true);
-        return true;
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-       switch (item.getItemId()) {
-	       case android.R.id.home:
-		       NavUtils.navigateUpFromSameTask(this);
-		       return true;
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.compose, menu);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+		return true;
+	}
 
-        }
-	    return super.onOptionsItemSelected(item);
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				return true;
+
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
 }
